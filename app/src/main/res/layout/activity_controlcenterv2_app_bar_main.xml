@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="nodomain.team3point1.suhosim.activities.ControlCenterv2">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/GadgetbridgeTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/GadgetbridgeTheme.PopupOverlay" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <include layout="@layout/activity_controlcenterv2_content_main" />
+
+    <!-- 심박수 그래프를 추가했다
+    <androidx.gridlayout.widget.GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:grid="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="400sp"
+        android:layout_gravity="top"
+        android:layout_marginTop="250dp"
+        grid:columnCount="2">
+
+        <TextView
+            android:id="@+id/livechart_max_heart_rate"
+            grid:layout_columnSpan="2"
+            grid:layout_columnWeight="1" />
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/livechart_steps_per_minute_history"
+            grid:layout_columnSpan="2"
+            grid:layout_columnWeight="1"
+            grid:layout_rowWeight="1"></com.github.mikephil.charting.charts.LineChart>
+    </androidx.gridlayout.widget.GridLayout>
+    <여기까지 -->
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="bottom|end"
+        app:srcCompat="@drawable/ic_add"
+        android:layout_margin="16dp" />
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
