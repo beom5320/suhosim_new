@@ -4,6 +4,92 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="MissingTranslation">
 
+    <string-array name="rhSelect">
+        <item>RH+형</item>
+        <item>RH-형</item>
+    </string-array>
+
+    <string-array name="bloodSelect">
+        <item>A형</item>
+        <item>B형</item>
+        <item>AB형</item>
+        <item>O형</item>
+    </string-array>
+
+    <string-array name="conSelect">
+        <item>1군</item>
+        <item>2군</item>
+        <item>3군</item>
+        <item>4군</item>
+        <item>기타</item>
+    </string-array>
+
+    <string-array name="con1Select">
+        <item>세균성 이질</item>
+        <item>장출혈성대장균감염증</item>
+        <item>장티푸스</item>
+        <item>콜레라</item>
+        <item>파라티푸스</item>
+        <item>페스트</item>
+        <item>메르스</item>
+    </string-array>
+
+    <string-array name="con2Select">
+        <item>B형간염</item>
+        <item>디프테리아</item>
+        <item>백일해</item>
+        <item>수두</item>
+        <item>유행성이하선염</item>
+        <item>일본뇌염</item>
+        <item>파상풍</item>
+        <item>폴리오</item>
+        <item>풍진</item>
+        <item>홍역</item>
+    </string-array>
+
+    <string-array name="con3Select">
+        <item>결핵</item>
+        <item>공수병</item>
+        <item>레지오넬라증</item>
+        <item>렙토스피라증</item>
+        <item>발진열</item>
+        <item>브루셀라증</item>
+        <item>비브리오패혈증</item>
+        <item>성홍열</item>
+        <item>수막구균성수막염</item>
+        <item>신증후군출혈열</item>
+        <item>인플루엔자</item>
+        <item>쯔쯔가무시증</item>
+        <item>탄저</item>
+        <item>한센병</item>
+        <item>성병</item>
+        <item>후천성면역결핍증</item>
+    </string-array>
+
+    <string-array name="con4Select">
+        <item>뎅기열</item>
+        <item>두창</item>
+        <item>라싸열</item>
+        <item>리슈마니아증</item>
+        <item>마버그열</item>
+        <item>바베시아증</item>
+        <item>보툴리눔독소증</item>
+        <item>신종전염병증후군</item>
+        <item>아프리카수면병</item>
+        <item>야토병</item>
+        <item>에볼라열</item>
+        <item>요우스</item>
+        <item>조류인플루엔자 인체감염증</item>
+        <item>주혈흡충증</item>
+        <item>중증급성호흡기증후군(SARS)</item>
+        <item>큐열</item>
+        <item>크립토스포리디움증</item>
+        <item>핀타</item>
+        <item>황열</item>
+    </string-array>
+
+
+
     <string-array name="pref_theme_options">
         <item>@string/pref_theme_light</item>
         <item>@string/pref_theme_dark</item>
