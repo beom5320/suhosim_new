@@ -3,9 +3,11 @@ package nodomain.team3point1.suhosim.activities;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 
 import android.content.Intent;
+import android.util.Log;
 import android.widget.TextView;
 import android.os.Bundle;
 
@@ -14,8 +16,10 @@ import nodomain.team3point1.suhosim.R;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -31,8 +35,7 @@ public class AboutYours extends AppCompatActivity {
     private Spinner rhspinner;
     private Spinner bloodspinner;
     private Button save;
-
-
+    private SharedPreferences firstview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,19 +134,17 @@ public class AboutYours extends AppCompatActivity {
             }
         });
 
-        save=(Button)findViewById(R.id.save);
+        save = (Button) findViewById(R.id.save);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getApplicationContext(),ControlCenterv2.class);
+                Intent intent = new Intent(getApplicationContext(), ControlCenterv2.class);
                 startActivity(intent);
             }
         });
 
+
     }
-
-
-
 
 
 }
