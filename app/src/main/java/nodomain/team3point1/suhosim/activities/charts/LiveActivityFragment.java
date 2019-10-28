@@ -31,7 +31,8 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.telephony.SmsManager;
-
+import android.app.PendingIntent;
+import android.os.Vibrator;
 
 import com.github.mikephil.charting.charts.BarLineChartBase;
 import com.github.mikephil.charting.charts.Chart;
@@ -91,8 +92,9 @@ public class LiveActivityFragment extends AbstractChartFragment {
     private LineDataSet mHeartRateSet;
     private int mHeartRate;
     private int WarningCount = 0;
+    private int WarningCount2 = 0;
     private int mMaxHeartRate = 0;
-    private double UserMaxHeartRate = 70;//(int)206.9 - (0.67 * 74);
+    private double UserMaxHeartRate =  105; //(int)206.9 - (0.67 * 74); //157
     private int UserMinHeartRate = 50;
     private TimestampTranslation tsTranslation;
 
@@ -194,19 +196,17 @@ public class LiveActivityFragment extends AbstractChartFragment {
         int timestamp = (int) (tsMillis / 1000); // translate to seconds
         return tsTranslation.shorten(timestamp); // and shorten
     }
-/*
-    private void SendSMS(String phonenumber, String message) {
+    /*
+        private void SendSMS(String phonenumber, String message) {
 
-        SmsManager smsManager = SmsManager.getDefault();
-        String sendTo = phonenumber;
-        String myMessage = message;
-        smsManager.sendTextMessage(sendTo, null, myMessage, null, null);
-        Toast.makeText(SMSSender.this, "전송되었습니다.", Toast.LENGTH_SHORT).show();
-        finish();
-    }
-
-    SendSMS("01037578540","ㅋㅋㅋㅋ");
-    */
+            SmsManager smsManager = SmsManager.getDefault();
+            String sendTo = phonenumber;
+            String myMessage = message;
+            smsManager.sendTextMessage(sendTo, null, myMessage, null, null);
+            Toast.makeText(SMSSender.this, "전송되었습니다.", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+        */
     /*여기가 심박수 */
     /*
        1.독거노인의 평균연령 찾기
@@ -228,17 +228,59 @@ public class LiveActivityFragment extends AbstractChartFragment {
         if (mMaxHeartRate < mHeartRate) {
             mMaxHeartRate = mHeartRate;
         }
-        if (mMaxHeartRate > UserMaxHeartRate)
+        if (mHeartRate > UserMaxHeartRate)
         {
             Toast.makeText(getContext(), "(경고) 최대심박수 초과!", Toast.LENGTH_LONG).show();
+
             WarningCount += 1;
+            if (WarningCount == 10)
+            {
+                SmsManager sm = SmsManager.getDefault();
+                //String messageText = "(경고!) 피보호자의 심박수가 최대 심박수를 넘어섰습니다.";
+                String messageText = "(경고!) 피보호자의 심박수가 이상 증세를 보이고 있습니다. 상태를 확인해주세요";
+                sm.sendTextMessage("01040360567", null, messageText+mHeartRate, null, null);
+                Toast.makeText(getContext(), "보호자에게 문자메시지가 전송되었습니다. ", Toast.LENGTH_SHORT).show();
+
+                String messageText2 = "실제상황입니다. 양병일 환자의 심박수가 심정지 전조증상을 보이고 있습니다. ";
+                String messageText3 = "집주소 : 경기도 안양시 만안구 박달2동 XX아파트 XXX동 XXX호";
+                String messageText4 = "나이 : (만)24세 / 수술이력 : [없음] / 혈액형 : [RH+ 호감형]";
+                sm.sendTextMessage("01096631750", null, messageText2+mHeartRate, null, null);
+                sm.sendTextMessage("01096631750", null, messageText3+mHeartRate, null, null);
+                sm.sendTextMessage("01096631750", null, messageText4+mHeartRate, null, null);
+                Toast.makeText(getContext(), "119에 문자메시지가 전송되었습니다. ", Toast.LENGTH_SHORT).show();
+            }
         }
-        if (WarningCount > 5 && UserMinHeartRate > mHeartRate) //count가 5이상이고 최소심박수(50)가 현재 심박수보다 높을 때
+        /*
+        if (mHeartRate > 10 && mHeartRate < UserMinHeartRate)
         {
+            WarningCount2 += 1;
+            if (WarningCount2 == 10)
+            {
+                SmsManager sm = SmsManager.getDefault();
+                String messageText = "(경고!) 피보호자의 심박수가 최저 심박수 밑으로 내려갔습니다.";
+                sm.sendTextMessage("01040360567", null, messageText+mHeartRate, null, null);
+                Toast.makeText(getContext(), "문자메시지가 전송되었습니다. ", Toast.LENGTH_SHORT).show();
+                WarningCount2 = 0;
+            }
+        }
+         */
+        if (WarningCount > 10 && UserMinHeartRate > mHeartRate) //count가 5이상이고 최소심박수(50)가 현재 심박수보다 높을 때
+        {
+            /*
+            String Name = "";
+            String Add = "";
+            String Phone="";
+
             String messageText = "(경고!) 피보호자의 심박수가 이상 증세를 보이고 있습니다. 상태를 확인해주세요";
+            // 119 전용
+            String messageText_119_1 = "실제상황입니다. [세글자]환자의 심박수가 심정지 전조증상을 보이고 있습니다. "
+            String messageText_119_2 = "집주소 : []"
+            String messageText_119_3 = "나이 : (만)[75]세 / 수술이력 : [] / 혈액형 : []"
             SmsManager sm = SmsManager.getDefault();
-            sm.sendTextMessage("01037578540", null, messageText, null, null);
+            sm.sendTextMessage(a, null, messageText, null, null);
             sm.sendTextMessage("01040360567", null, messageText, null, null);
+            Toast.makeText(getContext(), "문자메시지가 전송되었습니다.", Toast.LENGTH_SHORT).show();
+            */
             WarningCount = 0;
         }
 
@@ -249,6 +291,7 @@ public class LiveActivityFragment extends AbstractChartFragment {
     private int getCurrentHeartRate() {
         int result = mHeartRate;
         mHeartRate = -1;
+
         return result;
     }
 
