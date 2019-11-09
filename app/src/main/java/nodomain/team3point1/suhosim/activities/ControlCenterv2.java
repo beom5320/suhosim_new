@@ -23,6 +23,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
@@ -31,6 +32,10 @@ import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.view.MenuItem;
 import android.view.View;
+
+
+
+
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -86,6 +91,9 @@ public class ControlCenterv2 extends AppCompatActivity
 
     private static PhoneStateListener fakeStateListener;
 
+
+
+
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -113,6 +121,7 @@ public class ControlCenterv2 extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //메뉴에 대한 기본설정
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.controlcenter_navigation_drawer_open, R.string.controlcenter_navigation_drawer_close);
@@ -121,6 +130,8 @@ public class ControlCenterv2 extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
 
         //end of material design boilerplate
         deviceManager = ((GBApplication) getApplication()).getDeviceManager();
@@ -192,12 +203,20 @@ public class ControlCenterv2 extends AppCompatActivity
         /*
          * Ask for permission to intercept notifications on first run.
          */
+
+        //처음화면 설정
         Prefs prefs = GBApplication.getPrefs();
         if (prefs.getBoolean("firstrun", true)) {
-            prefs.getPreferences().edit().putBoolean("firstrun", false).apply();
+
             Intent enableIntent = new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
+            Intent newIntent = new Intent(ControlCenterv2.this, AboutYours.class);
             startActivity(enableIntent);
+            startActivity(newIntent);
+
+            prefs.getPreferences().edit().putBoolean("firstrun", false).apply();
         }
+
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkAndRequestPermissions();
         }
@@ -251,6 +270,7 @@ public class ControlCenterv2 extends AppCompatActivity
     }
 
 
+    ///////////////////////메뉴 선택 시작////////////////////////////////
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
@@ -258,41 +278,29 @@ public class ControlCenterv2 extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
 
         switch (item.getItemId()) {
+            case R.id.action_user:
+                Intent userIntent = new Intent(this, AboutYoursSave.class);
+                startActivityForResult(userIntent, MENU_REFRESH_CODE);
+                return true;
+
             case R.id.action_settings:
                 Intent settingsIntent = new Intent(this, SettingsActivity.class);
                 startActivityForResult(settingsIntent, MENU_REFRESH_CODE);
                 return true;
-            /* case R.id.action_debug:
-                Intent debugIntent = new Intent(this, DebugActivity.class);
-                startActivity(debugIntent);
-                return true;
-            case R.id.action_db_management:
-                Intent dbIntent = new Intent(this, DbManagementActivity.class);
-                startActivity(dbIntent);
-                return true;
-            case R.id.action_blacklist:
-                Intent blIntent = new Intent(this, AppBlacklistActivity.class);
-                startActivity(blIntent);
-                return true; */
+
             case R.id.device_action_discover:
                 launchDiscoveryActivity();
                 return true;
+
             case R.id.action_quit:
                 GBApplication.quit();
                 return true;
-            /* case R.id.donation_link:
-                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("https://liberapay.com/Gadgetbridge")); //TODO: centralize if ever used somewhere else
-                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(i);
-                return true;
-            case R.id.external_changelog:
-                ChangeLog cl = createChangeLog();
-                cl.getFullLogDialog().show();
-                return true; */
         }
-
         return true;
     }
+    ///////////////////////메뉴 선택 끝////////////////////////////////
+
+
 
     private ChangeLog createChangeLog() {
         String css = ChangeLog.DEFAULT_CSS;
@@ -378,6 +386,7 @@ public class ControlCenterv2 extends AppCompatActivity
         }
         AndroidUtils.setLanguage(this, language);
     }
+
 
 
 }

@@ -6,223 +6,521 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.AboutYours">
+    tools:context=".activities.AboutYoursSave">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
 
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="27dp"
-        android:layout_alignParentTop="true"
-        android:text="이       름"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/username"
-        app:layout_constraintEnd_toStartOf="@+id/username"
-        app:layout_constraintHorizontal_bias="0.359"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/username"
-        app:layout_constraintVertical_bias="0.576" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
-    <TextView
-        android:id="@+id/username"
-        android:layout_width="254dp"
-        android:layout_height="53dp"
-        android:layout_marginEnd="24dp"
-        android:text="usernme"
-        android:textAlignment="center"
-        android:textSize="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/userbirthday"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:textSize="20dp" />
+            </LinearLayout>
 
 
-    <Button
-        android:id="@+id/edit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="16dp"
-        android:text="수       정"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/userblood"
-        android:layout_width="254dp"
-        android:layout_height="53dp"
-        android:layout_marginEnd="24dp"
-        android:text="userblood"
-        android:textAlignment="center"
-        android:textSize="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/usermedical"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/userdrug"
-        android:layout_width="254dp"
-        android:layout_height="53dp"
-        android:layout_marginEnd="24dp"
-        android:text="userdrug"
-        android:textAlignment="center"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/usersurgery"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/userbirthday"
-        android:layout_width="254dp"
-        android:layout_height="53dp"
-        android:layout_marginEnd="24dp"
-        android:text="userbirthday"
-        android:textAlignment="center"
-        android:textSize="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/usergender"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/gender"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="성       별"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/usergender"
-        app:layout_constraintEnd_toStartOf="@+id/usergender"
-        app:layout_constraintHorizontal_bias="0.359"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/usergender"
-        app:layout_constraintVertical_bias="0.538" />
-
-    <TextView
-        android:id="@+id/usermedical"
-        android:layout_width="254dp"
-        android:layout_height="78dp"
-        android:layout_marginEnd="24dp"
-        android:text="usermedical"
-        android:textAlignment="center"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/userdrug"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/surgery"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="수술이력"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/usersurgery"
-        app:layout_constraintEnd_toStartOf="@+id/usersurgery"
-        app:layout_constraintHorizontal_bias="0.355"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/usersurgery"
-        app:layout_constraintVertical_bias="0.538" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="454dp">
 
 
-    <TextView
-        android:id="@+id/usersurgery"
-        android:layout_width="254dp"
-        android:layout_height="53dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="84dp"
-        android:text="usersurgery"
-        android:textAlignment="center"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
 
-    <TextView
-        android:id="@+id/useraddress"
-        android:layout_width="254dp"
-        android:layout_height="85dp"
-        android:layout_marginEnd="24dp"
-        android:text="경기도 안양시 만안구 안양천서로 311 106동 101호"
-        android:textAlignment="center"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/userblood"
-        app:layout_constraintEnd_toEndOf="parent" />
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="이       름"
+                    android:textSize="20dp" />
 
 
-    <TextView
-        android:id="@+id/address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="주       소"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/useraddress"
-        app:layout_constraintEnd_toStartOf="@+id/useraddress"
-        app:layout_constraintHorizontal_bias="0.359"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/useraddress"
-        app:layout_constraintVertical_bias="0.517" />
+                <TextView
+                    android:id="@+id/username"
+                    android:layout_width="216dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="usernme"
+                    android:textAlignment="center"
+                    android:textSize="30dp" />
 
-    <TextView
-        android:id="@+id/medicalHistory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="병력사항"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/usermedical"
-        app:layout_constraintEnd_toStartOf="@+id/usermedical"
-        app:layout_constraintHorizontal_bias="0.344"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/usermedical"
-        app:layout_constraintVertical_bias="0.529" />
 
-    <TextView
-        android:id="@+id/drug"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
 
-        android:layout_alignParentBottom="true"
-        android:text="약물복용"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/userdrug"
-        app:layout_constraintEnd_toStartOf="@+id/userdrug"
-        app:layout_constraintHorizontal_bias="0.362"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/userdrug"
-        app:layout_constraintVertical_bias="0.538" />
 
-    <TextView
-        android:id="@+id/usergender"
-        android:layout_width="254dp"
-        android:layout_height="53dp"
-        android:layout_marginEnd="24dp"
-        android:text="usergender"
-        android:textAlignment="center"
-        android:textSize="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/useraddress"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/birthday"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="생년월일"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/userbirthday"
-        app:layout_constraintEnd_toStartOf="@+id/userbirthday"
-        app:layout_constraintHorizontal_bias="0.362"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/userbirthday"
-        app:layout_constraintVertical_bias="0.576" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:textSize="20dp" />
+            </LinearLayout>
 
-    <TextView
-        android:id="@+id/blood"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="혈  액  형"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/userblood"
-        app:layout_constraintEnd_toStartOf="@+id/userblood"
-        app:layout_constraintHorizontal_bias="0.355"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/userblood"
-        app:layout_constraintVertical_bias="0.538" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="235dp">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/birthday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="생년월일"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/userbirthday"
+                    android:layout_weight="1"
+                    android:layout_width="216dp"
+                    android:layout_height="wrap_content"
+                    android:text="userbirthday"
+                    android:textAlignment="center"
+                    android:textSize="30dp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="127dp">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="주       소"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/useraddress"
+                    android:layout_weight="1"
+                    android:layout_width="216dp"
+                    android:layout_height="wrap_content"
+                    android:text="경기도 안양시 만안구 안양천서로 311 106동 101호"
+                    android:textAlignment="center"
+                    android:textSize="20dp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="378dp">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/gender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="성       별"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/usergender"
+                    android:layout_weight="1"
+                    android:layout_width="216dp"
+                    android:layout_height="wrap_content"
+                    android:text="usergender"
+                    android:textAlignment="center"
+                    android:textSize="30dp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="319dp">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/blood"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="혈  액  형"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/userblood"
+                    android:layout_weight="1"
+                    android:layout_width="216dp"
+                    android:layout_height="wrap_content"
+                    android:text="userblood"
+                    android:textAlignment="center"
+                    android:textSize="30dp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="64dp">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/medicalHistory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="병력사항"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/userMedical"
+                    android:layout_weight="1"
+                    android:layout_width="216dp"
+                    android:layout_height="wrap_content"
+                    android:text="병력"
+                    android:textAlignment="center"
+                    android:textSize="20dp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="581dp">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/drug"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="약물복용"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/userdrug"
+                    android:layout_weight="1"
+                    android:layout_width="216dp"
+                    android:layout_height="wrap_content"
+                    android:text="userdrug"
+                    android:textAlignment="center"
+                    android:textSize="20dp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="640dp">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/surgery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="수술이력"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/usersurgery"
+                    android:layout_weight="1"
+                    android:layout_width="216dp"
+                    android:layout_height="wrap_content"
+                    android:text="usersurgery"
+                    android:textAlignment="center"
+                    android:textSize="20dp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="[보호자 연락처]"
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="454dp">
+
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+
+                <TextView
+                    android:id="@+id/phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="전화번호"
+                    android:textSize="20dp" />
+
+
+                <TextView
+                    android:id="@+id/guardianphone"
+                    android:layout_weight="1"
+                    android:layout_width="216dp"
+                    android:layout_height="wrap_content"
+                    android:text="usersurgery"
+                    android:textAlignment="center"
+                    android:textSize="20dp" />
+
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="수       정" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,17 +1,17 @@
 package nodomain.team3point1.suhosim.activities;
 
+import androidx.annotation.IdRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
+
 import android.content.DialogInterface;
 
 import android.content.Intent;
-import android.util.Log;
-import android.widget.TextView;
 import android.os.Bundle;
 
 import nodomain.team3point1.suhosim.R;
+import nodomain.team3point1.suhosim.devices.DeviceManager;
 
 import android.view.View;
 import android.widget.Button;
@@ -22,11 +22,12 @@ import java.util.List;
 
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 
-import android.content.Context;
+
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
+import android.widget.Toast;
 
 
 public class AboutYours extends AppCompatActivity {
@@ -35,8 +36,9 @@ public class AboutYours extends AppCompatActivity {
     private Spinner rhspinner;
     private Spinner bloodspinner;
     private Button save;
-    private SharedPreferences firstview;
-
+    private String bloodS;
+   private SharedPreferences user;
+   private  SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +47,6 @@ public class AboutYours extends AppCompatActivity {
         final List<String> selectedItems = new ArrayList<String>();
 
 
-        //병력사항
         medicalHisoty = (Button) findViewById(R.id.medicalSelect);
 
 
@@ -64,7 +65,6 @@ public class AboutYours extends AppCompatActivity {
                                 new DialogInterface.OnMultiChoiceClickListener() {
                                     public void onClick(DialogInterface dialog, int which, boolean isChecked) {
                                         if (isChecked) {
-
                                             selectedItems.add(items[which]);
                                         } else {
                                             selectedItems.remove(items[which]);
@@ -105,7 +105,7 @@ public class AboutYours extends AppCompatActivity {
         rhspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
+                bloodS=rhspinner.getSelectedItem().toString();
             }
 
             @Override
@@ -125,7 +125,7 @@ public class AboutYours extends AppCompatActivity {
         bloodspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
+                bloodS += " " +bloodspinner.getSelectedItem().toString();
             }
 
             @Override
@@ -134,11 +134,66 @@ public class AboutYours extends AppCompatActivity {
             }
         });
 
+
         save = (Button) findViewById(R.id.save);
         save.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
+                user = getSharedPreferences("User", MODE_PRIVATE);
+
+                editor = user.edit();
+
+                EditText nameE = (EditText) findViewById(R.id.username);
+                String nameS = nameE.getText().toString();
+                editor.putString("name", nameS);
+
+                EditText birthE = (EditText) findViewById(R.id.userbirth);
+                String birthS = birthE.getText().toString();
+                editor.putString("birth", birthS);
+
+                EditText addressE = (EditText) findViewById(R.id.useraddress);
+                String addressS = addressE.getText().toString();
+                editor.putString("address", addressS);
+
+
+                RadioGroup.OnCheckedChangeListener radioGroupButtonChangeListener = new RadioGroup.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
+                        if (i == R.id.female) {
+                            editor.putString("gender", "여성");
+                        } else if (i == R.id.male) {
+                            editor.putString("gender", "남성");
+                        }
+                    }
+                };
+
+                editor.putString("blood", bloodS);
+
+                EditText medicalE = (EditText) findViewById(R.id.userMedicalHistory);
+                String medicalS = medicalE.getText().toString();
+                editor.putString("medical", medicalS);
+
+                EditText drugE = (EditText) findViewById(R.id.userdrug);
+                String drugS = drugE.getText().toString();
+                editor.putString("drug", drugS);
+
+                EditText surgeryE = (EditText) findViewById(R.id.usersurgery);
+                String surgeryS = surgeryE.getText().toString();
+                editor.putString("surgery", surgeryS);
+
+                EditText phoneE = (EditText) findViewById(R.id.guardianphone);
+                String phoneS = phoneE.getText().toString();
+                editor.putString("phone", phoneS);
+
+// 메모리에 있는 데이터를 저장장치에 저장한다.
+                editor.commit();
+
+                //뒤로가기 제거
                 Intent intent = new Intent(getApplicationContext(), ControlCenterv2.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
                 startActivity(intent);
             }
         });
