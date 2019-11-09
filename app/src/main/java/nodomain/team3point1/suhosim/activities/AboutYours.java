@@ -11,8 +11,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import nodomain.team3point1.suhosim.R;
-import nodomain.team3point1.suhosim.devices.DeviceManager;
 
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +22,7 @@ import java.util.List;
 
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
@@ -37,19 +38,17 @@ public class AboutYours extends AppCompatActivity {
     private Spinner bloodspinner;
     private Button save;
     private String bloodS;
-   private SharedPreferences user;
-   private  SharedPreferences.Editor editor;
-    @Override
+    private SharedPreferences user;
+    private SharedPreferences.Editor editor;
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_yours);
 
+        //////////////////////////병력사항 선택 시작//////////////////////////
         final List<String> selectedItems = new ArrayList<String>();
-
-
         medicalHisoty = (Button) findViewById(R.id.medicalSelect);
-
-
         medicalHisoty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,9 +92,9 @@ public class AboutYours extends AppCompatActivity {
 
             }
         });
+//////////////////////////병력사항 선택 끄읏//////////////////////////
 
-
-        //RH 타입
+        ////////////////////RH 타입 시작////////////////////
         String[] rhlist = getResources().getStringArray(R.array.rhSelect);
         rhspinner = (Spinner) findViewById(R.id.rhset);
         ArrayAdapter rhadapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, rhlist);
@@ -105,7 +104,7 @@ public class AboutYours extends AppCompatActivity {
         rhspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                bloodS=rhspinner.getSelectedItem().toString();
+                bloodS = rhspinner.getSelectedItem().toString();
             }
 
             @Override
@@ -113,9 +112,9 @@ public class AboutYours extends AppCompatActivity {
 
             }
         });
+////////////////////RH 타입 끄읏////////////////////
 
-
-        //blood 타입
+        ///////////////////////blood 타입 시작///////////////////////////
         final String[] bloodlist = getResources().getStringArray(R.array.bloodSelect);
         bloodspinner = (Spinner) findViewById(R.id.bloodset);
         ArrayAdapter bloodadapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, bloodlist);
@@ -125,7 +124,7 @@ public class AboutYours extends AppCompatActivity {
         bloodspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                bloodS += " " +bloodspinner.getSelectedItem().toString();
+                bloodS += " " + bloodspinner.getSelectedItem().toString();
             }
 
             @Override
@@ -133,8 +132,10 @@ public class AboutYours extends AppCompatActivity {
 
             }
         });
+///////////////////////blood 타입 끄읏///////////////////////////
 
 
+        //////저장 눌렀을 때////////
         save = (Button) findViewById(R.id.save);
         save.setOnClickListener(new View.OnClickListener() {
 
@@ -156,17 +157,20 @@ public class AboutYours extends AppCompatActivity {
                 String addressS = addressE.getText().toString();
                 editor.putString("address", addressS);
 
-
-                RadioGroup.OnCheckedChangeListener radioGroupButtonChangeListener = new RadioGroup.OnCheckedChangeListener() {
+                RadioGroup radioGroup= (RadioGroup) findViewById(R.id.usergender);
+                radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                     @Override
-                    public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
-                        if (i == R.id.female) {
-                            editor.putString("gender", "여성");
-                        } else if (i == R.id.male) {
-                            editor.putString("gender", "남성");
+                    public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                        switch (i) {
+                            case R.id.female:
+                                editor.putString("gender", "여성");
+                                break;
+                            case R.id.male:
+                                editor.putString("gender", "남성");
+                                break;
                         }
                     }
-                };
+                });
 
                 editor.putString("blood", bloodS);
 
@@ -185,17 +189,41 @@ public class AboutYours extends AppCompatActivity {
                 EditText phoneE = (EditText) findViewById(R.id.guardianphone);
                 String phoneS = phoneE.getText().toString();
                 editor.putString("phone", phoneS);
-
-// 메모리에 있는 데이터를 저장장치에 저장한다.
                 editor.commit();
 
-                //뒤로가기 제거
-                Intent intent = new Intent(getApplicationContext(), ControlCenterv2.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-                startActivity(intent);
+                boolean check;
+                String name = user.getString("name", null);
+
+                String birth = user.getString("birth", null);
+
+                String address = user.getString("address", null);
+
+                String gender = user.getString("gender", null);
+
+                String blood = user.getString("blood", null);
+
+                String number = user.getString("phone", null);
+
+                Toast.makeText(getApplicationContext(), gender, Toast.LENGTH_LONG).show();
+
+               if (TextUtils.isEmpty(name) || TextUtils.isEmpty(birth) || TextUtils.isEmpty(address) || TextUtils.isEmpty(gender) || TextUtils.isEmpty(blood) || TextUtils.isEmpty(number))
+                    check = false;
+                else
+                    check = true;
+                //메인 화면으로 넘어가기 & 뒤로가기 제거
+              /* if (!check) {
+                    Toast.makeText(getApplicationContext(), "빈 필수사항이 있습니다.", Toast.LENGTH_LONG).show();
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), ControlCenterv2.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                    startActivity(intent);
+                }*/
+
             }
+
         });
 
 
