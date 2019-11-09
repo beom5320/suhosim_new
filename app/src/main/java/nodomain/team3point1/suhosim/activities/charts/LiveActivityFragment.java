@@ -21,7 +21,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
@@ -71,8 +70,6 @@ import nodomain.team3point1.suhosim.model.ActivityUser;
 import nodomain.team3point1.suhosim.model.DeviceService;
 import nodomain.team3point1.suhosim.util.GB;
 
-import static android.content.Context.MODE_PRIVATE;
-
 public class LiveActivityFragment extends AbstractChartFragment {
     private static final Logger LOG = LoggerFactory.getLogger(LiveActivityFragment.class);
     private static final int MAX_STEPS_PER_MINUTE = 300;
@@ -100,8 +97,6 @@ public class LiveActivityFragment extends AbstractChartFragment {
     private double UserMaxHeartRate =  105; //(int)206.9 - (0.67 * 74); //157
     private int UserMinHeartRate = 50;
     private TimestampTranslation tsTranslation;
-
-
 
     private class Steps {
         private int steps;
@@ -228,12 +223,6 @@ public class LiveActivityFragment extends AbstractChartFragment {
        2. ??..??...??????????????!!?
      */
     private void setCurrentHeartRate(int heartRate, int timestamp) {
-
-        //환자 정보 불러오기
-        SharedPreferences user = getActivity().getSharedPreferences("User", MODE_PRIVATE);
-        String phone=user.getString("phone",null); //해당값 불러오는 것, 해당값이 없을 경우 null호출
-
-
         addHistoryDataSet(true);
         mHeartRate = heartRate;
         if (mMaxHeartRate < mHeartRate) {
@@ -244,13 +233,12 @@ public class LiveActivityFragment extends AbstractChartFragment {
             Toast.makeText(getContext(), "(경고) 최대심박수 초과!", Toast.LENGTH_LONG).show();
 
             WarningCount += 1;
-            if (WarningCount == 1)
+            if (WarningCount == 10)
             {
                 SmsManager sm = SmsManager.getDefault();
                 //String messageText = "(경고!) 피보호자의 심박수가 최대 심박수를 넘어섰습니다.";
                 String messageText = "(경고!) 피보호자의 심박수가 이상 증세를 보이고 있습니다. 상태를 확인해주세요";
-
-                sm.sendTextMessage(phone, null, messageText+mHeartRate, null, null);
+                sm.sendTextMessage("01040360567", null, messageText+mHeartRate, null, null);
                 Toast.makeText(getContext(), "보호자에게 문자메시지가 전송되었습니다. ", Toast.LENGTH_SHORT).show();
 
                 String messageText2 = "실제상황입니다. 양병일 환자의 심박수가 심정지 전조증상을 보이고 있습니다. ";

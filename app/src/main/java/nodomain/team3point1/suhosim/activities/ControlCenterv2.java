@@ -360,6 +360,8 @@ public class ControlCenterv2 extends AppCompatActivity
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CALENDAR) == PackageManager.PERMISSION_DENIED)
             wantedPermissions.add(Manifest.permission.READ_CALENDAR);
         // ^@^ 앱 실행 시 위치 권한 요청
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_DENIED)
+            wantedPermissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_DENIED)
             wantedPermissions.add(Manifest.permission.ACCESS_COARSE_LOCATION);
         try {
