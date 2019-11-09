@@ -109,6 +109,7 @@
                 card_view:srcCompat="@drawable/ic_more_vert"
                 android:focusable="true" />
 
+            <!-- ★배터리★ -->
             <LinearLayout
                 android:id="@+id/device_battery_status_box"
                 android:layout_width="wrap_content"
@@ -141,30 +142,30 @@
 
             <ImageView
                 android:id="@+id/device_specific_settings"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:layout_below="@id/device_image"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginBottom="4dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="0dp"
                 android:layout_toEndOf="@id/device_battery_status_box"
                 android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
                 android:focusable="true"
-                android:padding="4dp"
+                android:padding="0dp"
                 android:scaleType="fitXY"
                 android:tint="@color/secondarytext"
                 card_view:srcCompat="@drawable/ic_settings" />
 
-
+            <!-- FM 라디오 -->
             <LinearLayout
                 android:id="@+id/device_fm_frequency_box"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:layout_below="@id/device_image"
                 android:layout_toEndOf="@id/device_specific_settings"
-                android:layout_margin="4dp"
+                android:layout_margin="0dp"
                 android:orientation="vertical">
 
                 <ImageView
@@ -187,27 +188,27 @@
                     tools:text="107.8" />
 
             </LinearLayout>
-
+            <!-- 뭐야이건 -->
             <ImageView
                 android:id="@+id/device_led_color"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:layout_below="@id/device_image"
-                android:layout_margin="4dp"
+                android:layout_margin="0dp"
                 android:layout_toEndOf="@id/device_fm_frequency_box"
                 android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
-                android:padding="4dp"
+                android:padding="0dp"
                 android:scaleType="fitXY"
                 card_view:srcCompat="@drawable/ic_led_color"
                 android:focusable="true" />
 
             <LinearLayout
                 android:id="@+id/device_action_fetch_activity_box"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:layout_below="@id/device_image"
-                android:layout_margin="4dp"
+                android:layout_margin="0dp"
                 android:layout_toEndOf="@id/device_led_color"
                 android:gravity="center_vertical"
                 android:minWidth="36dp"
@@ -215,9 +216,9 @@
 
                 <ImageView
                     android:id="@+id/device_action_fetch_activity"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:padding="4dp"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:padding="0dp"
                     android:background="?android:attr/selectableItemBackground"
                     android:clickable="true"
                     android:contentDescription="@string/controlcenter_fetch_activity_data"
@@ -230,7 +231,7 @@
                     android:id="@+id/device_busy_indicator"
                     style="@android:style/Widget.ProgressBar.Horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="4dp"
+                    android:layout_height="0dp"
                     android:indeterminate="true"
                     android:visibility="visible"
                     tools:visibility="visible" />
@@ -239,15 +240,15 @@
 
             <ImageView
                 android:id="@+id/device_action_take_screenshot"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:layout_below="@id/device_image"
-                android:layout_margin="4dp"
+                android:layout_margin="0dp"
                 android:layout_toEndOf="@id/device_action_fetch_activity_box"
                 android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
                 android:contentDescription="@string/controlcenter_take_screenshot"
-                android:padding="4dp"
+                android:padding="0dp"
                 android:scaleType="fitXY"
                 android:tint="@color/secondarytext"
                 card_view:srcCompat="@drawable/ic_screenshot"
@@ -255,15 +256,15 @@
 
             <ImageView
                 android:id="@+id/device_action_manage_apps"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:layout_below="@id/device_image"
-                android:layout_margin="4dp"
+                android:layout_margin="0dp"
                 android:layout_toEndOf="@id/device_action_take_screenshot"
                 android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
                 android:contentDescription="@string/title_activity_appmanager"
-                android:padding="4dp"
+                android:padding="0dp"
                 android:scaleType="fitXY"
                 android:tint="@color/secondarytext"
                 card_view:srcCompat="@drawable/ic_action_manage_apps"
@@ -285,6 +286,7 @@
                 card_view:srcCompat="@drawable/ic_device_set_alarms"
                 android:focusable="true" />
 -->
+            <!-- ★그래프★ -->
             <ImageView
                 android:id="@+id/device_action_show_activity_graphs"
                 android:layout_width="40dp"
@@ -303,15 +305,15 @@
 
             <ImageView
                 android:id="@+id/device_action_show_activity_tracks"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:layout_below="@id/device_image"
-                android:layout_margin="4dp"
+                android:layout_margin="0dp"
                 android:layout_toEndOf="@id/device_action_show_activity_graphs"
                 android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
                 android:contentDescription="@string/controlcenter_start_activity_tracks"
-                android:padding="4dp"
+                android:padding="0dp"
                 android:scaleType="fitXY"
                 android:tint="@color/secondarytext"
                 card_view:srcCompat="@drawable/ic_activity_tracks"
@@ -319,14 +321,14 @@
 
             <ImageView
                 android:id="@+id/device_action_find"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:layout_below="@id/device_image"
-                android:layout_margin="4dp"
+                android:layout_margin="0dp"
                 android:layout_toEndOf="@id/device_action_show_activity_tracks"
                 android:clickable="true"
                 android:contentDescription="@string/controlcenter_find_device"
-                android:padding="4dp"
+                android:padding="0dp"
                 android:scaleType="fitXY"
                 android:tint="@color/secondarytext"
                 card_view:srcCompat="@drawable/ic_action_find_lost_device"
@@ -334,14 +336,14 @@
 
             <ImageView
                 android:id="@+id/device_action_calibrate"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:layout_below="@id/device_image"
-                android:layout_margin="4dp"
+                android:layout_margin="0dp"
                 android:layout_toEndOf="@id/device_action_find"
                 android:clickable="true"
                 android:contentDescription="@string/controlcenter_calibrate_device"
-                android:padding="4dp"
+                android:padding="0dp"
                 android:scaleType="fitXY"
                 android:tint="@color/secondarytext"
                 card_view:srcCompat="@drawable/ic_activity_unknown"
