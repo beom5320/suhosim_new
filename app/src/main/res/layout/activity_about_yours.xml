@@ -22,7 +22,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -65,7 +65,8 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint=""
-                    android:inputType="text" />
+                    android:inputType="text"
+                    android:text=" " />
 
 
                 <View
@@ -75,10 +76,10 @@
             </LinearLayout>
 
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -86,7 +87,6 @@
                     android:text=""
                     android:textSize="20dp" />
             </LinearLayout>
-
 
 
             <LinearLayout
@@ -125,10 +125,10 @@
             </LinearLayout>
 
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -136,7 +136,6 @@
                     android:text=""
                     android:textSize="20dp" />
             </LinearLayout>
-
 
 
             <LinearLayout
@@ -165,7 +164,6 @@
             </LinearLayout>
 
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -191,10 +189,10 @@
             </LinearLayout>
 
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -202,7 +200,6 @@
                     android:text=""
                     android:textSize="20dp" />
             </LinearLayout>
-
 
 
             <LinearLayout
@@ -233,8 +230,8 @@
                     android:id="@+id/radioGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_weight="3">
+                    android:layout_weight="3"
+                    android:orientation="horizontal">
 
                     <RadioButton
                         android:id="@+id/female"
@@ -258,10 +255,10 @@
             </LinearLayout>
 
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -269,7 +266,6 @@
                     android:text=""
                     android:textSize="20dp" />
             </LinearLayout>
-
 
 
             <LinearLayout
@@ -312,10 +308,10 @@
             </LinearLayout>
 
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -323,7 +319,6 @@
                     android:text=""
                     android:textSize="20dp" />
             </LinearLayout>
-
 
 
             <LinearLayout
@@ -341,9 +336,9 @@
                     android:id="@+id/medicalHistory"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.2"
                     android:text="병력사항"
-                    android:textSize="20dp"
-                    android:layout_weight="0.2"/>
+                    android:textSize="20dp" />
 
                 <Button
                     android:id="@+id/medicalSelect"
@@ -358,10 +353,10 @@
             </LinearLayout>
 
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
                 <View
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -384,10 +379,10 @@
             </LinearLayout>
 
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -420,10 +415,10 @@
                     android:id="@+id/userdrug"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:inputType="textImeMultiLine"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:hint="" />
+                    android:hint=""
+                    android:inputType="textImeMultiLine" />
 
                 <View
                     android:layout_width="0dp"
@@ -432,10 +427,10 @@
             </LinearLayout>
 
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -443,7 +438,6 @@
                     android:text=""
                     android:textSize="20dp" />
             </LinearLayout>
-
 
 
             <LinearLayout
@@ -485,6 +479,90 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="[보호자 연락처]"
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="454dp">
+
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+
+                <TextView
+                    android:id="@+id/phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="전화번호"
+                    android:textSize="20dp" />
+
+
+                <EditText
+                    android:id="@+id/guardianphone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint=""
+                    android:inputType="text" />
+
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

@@ -4,6 +4,12 @@
     <group
         android:checkableBehavior="single"
         android:id="@+id/applicaction_options">
+
+        <item android:id="@+id/action_user"
+            android:title="사용자 정보"
+            android:icon="@drawable/ic_user" />
+
+
         <item android:id="@+id/action_settings"
             android:title="@string/action_settings"
             android:icon="@drawable/ic_settings" />
