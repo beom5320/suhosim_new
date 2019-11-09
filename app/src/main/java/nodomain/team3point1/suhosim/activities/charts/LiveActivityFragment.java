@@ -17,6 +17,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 package nodomain.team3point1.suhosim.activities.charts;
 
+import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -61,6 +62,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import nodomain.team3point1.suhosim.GBApplication;
+import nodomain.team3point1.suhosim.GetLocation;
+import nodomain.team3point1.suhosim.GpsTracker;
 import nodomain.team3point1.suhosim.R;
 import nodomain.team3point1.suhosim.activities.HeartRateUtils;
 import nodomain.team3point1.suhosim.database.DBHandler;
@@ -94,9 +97,15 @@ public class LiveActivityFragment extends AbstractChartFragment {
     private int WarningCount = 0;
     private int WarningCount2 = 0;
     private int mMaxHeartRate = 0;
-    private double UserMaxHeartRate =  105; //(int)206.9 - (0.67 * 74); //157
+    private double UserMaxHeartRate =  51; //(int)206.9 - (0.67 * 74); //157
     private int UserMinHeartRate = 50;
     private TimestampTranslation tsTranslation;
+
+    private static final int GPS_ENABLE_REQUEST_CODE = 2001;
+    private static final int PERMISSIONS_REQUEST_CODE = 100;
+    String[] REQUIRED_PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
+    private GpsTracker gpsTracker;
+    private GetLocation getLocation;
 
     private class Steps {
         private int steps;
@@ -230,24 +239,32 @@ public class LiveActivityFragment extends AbstractChartFragment {
         }
         if (mHeartRate > UserMaxHeartRate)
         {
-            Toast.makeText(getContext(), "(경고) 최대심박수 초과!", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getContext(), "(경고) 최대심박수 초과!", Toast.LENGTH_LONG).show();
 
             WarningCount += 1;
-            if (WarningCount == 10)
+            if (WarningCount == 1)
             {
-                SmsManager sm = SmsManager.getDefault();
-                //String messageText = "(경고!) 피보호자의 심박수가 최대 심박수를 넘어섰습니다.";
-                String messageText = "(경고!) 피보호자의 심박수가 이상 증세를 보이고 있습니다. 상태를 확인해주세요";
-                sm.sendTextMessage("01040360567", null, messageText+mHeartRate, null, null);
-                Toast.makeText(getContext(), "보호자에게 문자메시지가 전송되었습니다. ", Toast.LENGTH_SHORT).show();
+                gpsTracker = new GpsTracker(getContext());
+                double latitude = gpsTracker.getLatitude();
+                double longitude = gpsTracker.getLongitude();
 
-                String messageText2 = "실제상황입니다. 양병일 환자의 심박수가 심정지 전조증상을 보이고 있습니다. ";
-                String messageText3 = "집주소 : 경기도 안양시 만안구 박달2동 XX아파트 XXX동 XXX호";
-                String messageText4 = "나이 : (만)24세 / 수술이력 : [없음] / 혈액형 : [RH+ 호감형]";
-                sm.sendTextMessage("01096631750", null, messageText2+mHeartRate, null, null);
-                sm.sendTextMessage("01096631750", null, messageText3+mHeartRate, null, null);
-                sm.sendTextMessage("01096631750", null, messageText4+mHeartRate, null, null);
-                Toast.makeText(getContext(), "119에 문자메시지가 전송되었습니다. ", Toast.LENGTH_SHORT).show();
+                getLocation = new GetLocation();
+                String address = getLocation.getCurrentAddress(latitude, longitude);
+
+                Toast.makeText(getContext(), "위도:" + latitude + "\n경도:" + longitude + "\n" + address, Toast.LENGTH_LONG).show();
+
+                SmsManager sm = SmsManager.getDefault();
+                String messageText1 = "[수호심 앱에서 긴급 발신된 문자입니다]\n피보호자 OOO님의 심박수가 이상 증세를 보이고 있습니다. 심박수:"+mHeartRate;
+                String messageText2 = "[현재 GPS 위치]\n위도:"+latitude+", 경도:"+longitude;
+                String messageText3 = "[현재 GPS 주소]\n"+address;
+
+                //String messageText2 = "실제상황입니다. 양병일 환자의 심박수가 심정지 전조증상을 보이고 있습니다. ";
+                //String messageText3 = "집주소 : 경기도 안양시 만안구 박달2동 XX아파트 XXX동 XXX호";
+                //String messageText4 = "나이 : (만)24세 / 수술이력 : [없음] / 혈액형 : [RH+ 호감형]";
+                sm.sendTextMessage("01096631750", null, messageText1, null, null);
+                sm.sendTextMessage("01096631750", null, messageText2, null, null);
+                sm.sendTextMessage("01096631750", null, messageText3, null, null);
+                //Toast.makeText(getContext(), "119에 문자메시지가 전송되었습니다. ", Toast.LENGTH_SHORT).show();
             }
         }
         /*
