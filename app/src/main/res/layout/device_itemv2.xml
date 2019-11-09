@@ -69,7 +69,7 @@
 
             <TextView
                 android:id="@+id/device_name"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@id/device_image"
                 android:layout_alignParentEnd="true"
@@ -78,7 +78,7 @@
                 android:gravity="center"
                 android:maxLines="1"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                tools:text="My Pebble Watch" />
+                tools:text="Mi Band 3" />
 
             <TextView
                 android:id="@+id/device_status"
@@ -128,17 +128,25 @@
                     android:tint="@color/secondarytext"
                     card_view:srcCompat="@drawable/level_list_battery" />
 
-                <TextView
-                    android:id="@+id/battery_status"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:minWidth="36dp"
-                    android:textColor="@color/secondarytext"
-                    android:textStyle="bold"
-                    tools:text="100%" />
-
             </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/battery_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/device_image"
+                android:layout_toEndOf="@id/device_battery_status_box"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:minWidth="40dp"
+                android:minHeight="40dp"
+                android:textSize="18dp"
+                android:textColor="@color/secondarytext"
+                android:textStyle="normal"
+                tools:text="100%" />
+
+
 
             <ImageView
                 android:id="@+id/device_specific_settings"
@@ -289,11 +297,11 @@
             <!-- ★그래프★ -->
             <ImageView
                 android:id="@+id/device_action_show_activity_graphs"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_below="@id/device_image"
-                android:layout_margin="4dp"
-                android:layout_toEndOf="@id/device_action_manage_apps"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="168dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
                 android:contentDescription="@string/controlcenter_start_activitymonitor"
@@ -302,6 +310,23 @@
                 android:tint="@color/secondarytext"
                 card_view:srcCompat="@drawable/ic_activity_graphs"
                 android:focusable="true" />
+
+            <TextView
+                android:id="@+id/device_action_show_activity_graphs_text"
+                android:text="실시간 심박수 그래프"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginLeft="168dp"
+                android:layout_below="@id/device_image"
+                android:clickable="true"
+                android:layout_toEndOf="@id/device_battery_status_box"
+                android:gravity="center"
+                android:minWidth="36dp"
+                android:minHeight="40dp"
+                android:textSize="18dp"
+                android:textColor="@color/secondarytext"
+                android:textStyle="normal"/>
 
             <ImageView
                 android:id="@+id/device_action_show_activity_tracks"

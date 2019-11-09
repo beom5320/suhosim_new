@@ -137,7 +137,7 @@ public class GBDeviceAdapterv2 extends RecyclerView.Adapter<GBDeviceAdapterv2.Vi
 
         if (batteryLevel != GBDevice.BATTERY_UNKNOWN) {
             holder.batteryStatusBox.setVisibility(View.VISIBLE);
-            holder.batteryStatusLabel.setText(device.getBatteryLevel() + "%");
+            holder.batteryStatusLabel.setText("배터리 "+device.getBatteryLevel() + "%"); // ^@^ "배터리" 텍스트 추가. 김진범
             if (BatteryState.BATTERY_CHARGING.equals(batteryState) ||
                     BatteryState.BATTERY_CHARGING_FULL.equals(batteryState)) {
                 holder.batteryIcon.setImageLevel(device.getBatteryLevel() + 100);
@@ -213,8 +213,23 @@ public class GBDeviceAdapterv2 extends RecyclerView.Adapter<GBDeviceAdapterv2.Vi
 
 
         //show graphs
-        holder.showActivityGraphs.setVisibility(coordinator.supportsActivityTracking() ? View.VISIBLE : View.GONE);
+        holder.showActivityGraphs.setVisibility(batteryLevel != GBDevice.BATTERY_UNKNOWN ? View.VISIBLE : View.GONE);
         holder.showActivityGraphs.setOnClickListener(new View.OnClickListener()
+
+                                                     {
+                                                         @Override
+                                                         public void onClick(View v) {
+                                                             Intent startIntent;
+                                                             startIntent = new Intent(context, ChartsActivity.class);
+                                                             startIntent.putExtra(GBDevice.EXTRA_DEVICE, device);
+                                                             context.startActivity(startIntent);
+                                                         }
+                                                     }
+        );
+
+        //show graphs
+        holder.showActivityGraphsText.setVisibility(batteryLevel != GBDevice.BATTERY_UNKNOWN ? View.VISIBLE : View.GONE);
+        holder.showActivityGraphsText.setOnClickListener(new View.OnClickListener()
 
                                                      {
                                                          @Override
@@ -482,6 +497,7 @@ public class GBDeviceAdapterv2 extends RecyclerView.Adapter<GBDeviceAdapterv2.Vi
         ImageView manageAppsView;
         ImageView setAlarmsView;
         ImageView showActivityGraphs;
+        TextView showActivityGraphsText;
         ImageView showActivityTracks;
         ImageView calibrateDevice;
 
@@ -515,6 +531,7 @@ public class GBDeviceAdapterv2 extends RecyclerView.Adapter<GBDeviceAdapterv2.Vi
             manageAppsView = view.findViewById(R.id.device_action_manage_apps);
             //^@^setAlarmsView = view.findViewById(R.id.device_action_set_alarms);
             showActivityGraphs = view.findViewById(R.id.device_action_show_activity_graphs);
+            showActivityGraphsText = view.findViewById(R.id.device_action_show_activity_graphs_text);
             showActivityTracks = view.findViewById(R.id.device_action_show_activity_tracks);
             deviceInfoView = view.findViewById(R.id.device_info_image);
             calibrateDevice = view.findViewById(R.id.device_action_calibrate);
