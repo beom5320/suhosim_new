@@ -285,14 +285,14 @@ public class ControlCenterv2 extends AppCompatActivity
                 startActivityForResult(userIntent, MENU_REFRESH_CODE);
                 return true;
 
-            case R.id.action_settings:
+            /*case R.id.action_settings:
                 Intent settingsIntent = new Intent(this, SettingsActivity.class);
                 startActivityForResult(settingsIntent, MENU_REFRESH_CODE);
                 return true;
 
             case R.id.device_action_discover:
                 launchDiscoveryActivity();
-                return true;
+                return true;*/
 
             case R.id.action_quit:
                 GBApplication.quit();

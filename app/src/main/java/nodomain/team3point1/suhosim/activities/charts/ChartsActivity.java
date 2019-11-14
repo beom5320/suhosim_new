@@ -250,7 +250,7 @@ public class ChartsActivity extends AbstractGBFragmentActivity implements Charts
 
         DeviceCoordinator coordinator = DeviceHelper.getInstance().getCoordinator(mGBDevice);
         if (!mGBDevice.isConnected() || !coordinator.supportsActivityDataFetching()) {
-            menu.removeItem(R.id.charts_fetch_activity_data);
+            //menu.removeItem(R.id.charts_fetch_activity_data); ^@^
         }
         return true;
     }
@@ -266,13 +266,13 @@ public class ChartsActivity extends AbstractGBFragmentActivity implements Charts
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.charts_fetch_activity_data:
+            /*case R.id.charts_fetch_activity_data: ^@^
                 fetchActivityData();
                 return true;
             case R.id.prefs_charts_menu:
                 Intent settingsIntent = new Intent(this, ChartsPreferencesActivity.class);
                 startActivityForResult(settingsIntent,1);
-                return true;
+                return true;*/
             default:
                 break;
         }
