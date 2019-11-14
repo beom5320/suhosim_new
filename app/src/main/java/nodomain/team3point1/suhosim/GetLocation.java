@@ -26,6 +26,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+import static nodomain.team3point1.suhosim.GBApplication.getContext;
+
 
 public class GetLocation extends AppCompatActivity {
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
@@ -155,29 +157,30 @@ public class GetLocation extends AppCompatActivity {
     public String getCurrentAddress(double latitude, double longitude) {
 
         //지오코더... GPS를 주소로 변환
-        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-
-        List<Address> addresses;
+        Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
+        List<Address> addresses = null;
 
         try {
-
             addresses = geocoder.getFromLocation(
                     latitude,
                     longitude,
                     7);
+            Log.d("@@@", ""+latitude+","+longitude+","+addresses);
         } catch (IOException ioException) {
+            Log.d("@@@", "지오코더 서비스 사용 불가");
             //네트워크 문제
-            Toast.makeText(this, "지오코더 서비스 사용불가", Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "지오코더 서비스 사용불가", Toast.LENGTH_LONG).show();
             return "지오코더 서비스 사용불가";
         } catch (IllegalArgumentException illegalArgumentException) {
-            Toast.makeText(this, "잘못된 GPS 좌표", Toast.LENGTH_LONG).show();
+            Log.d("@@@", "잘못된 GPS 좌표");
+            //Toast.makeText(this, "잘못된 GPS 좌표", Toast.LENGTH_LONG).show();
             return "잘못된 GPS 좌표";
 
         }
 
 
         if (addresses == null || addresses.size() == 0) {
-            Toast.makeText(this, "주소 미발견", Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "주소 미발견", Toast.LENGTH_LONG).show();
             return "주소 미발견";
 
         }
