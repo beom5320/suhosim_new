@@ -209,11 +209,13 @@ public class ControlCenterv2 extends AppCompatActivity
         if (prefs.getBoolean("firstrun", true)) {
 
             Intent enableIntent = new Intent("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS");
-            //Intent newIntent = new Intent(ControlCenterv2.this, AboutYours.class);
+            Intent newIntent = new Intent(ControlCenterv2.this, AboutYours.class);
+            newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            newIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(enableIntent);
-            //startActivity(newIntent);
+            startActivity(newIntent);
 
-            prefs.getPreferences().edit().putBoolean("firstrun", false).apply();
+
         }
 
 

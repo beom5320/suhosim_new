@@ -564,8 +564,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:hint=""
-                    android:inputType="text" />
+                    android:hint="-없이 연속으로 입력"
+                    android:inputType="number"
+                    android:maxLength="11" />
 
 
                 <View
