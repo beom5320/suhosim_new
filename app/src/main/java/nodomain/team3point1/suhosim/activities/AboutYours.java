@@ -10,9 +10,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
+import nodomain.team3point1.suhosim.GBApplication;
 import nodomain.team3point1.suhosim.R;
-import nodomain.team3point1.suhosim.devices.DeviceManager;
+import nodomain.team3point1.suhosim.util.Prefs;
 
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +24,7 @@ import java.util.List;
 
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
@@ -37,19 +40,26 @@ public class AboutYours extends AppCompatActivity {
     private Spinner bloodspinner;
     private Button save;
     private String bloodS;
-   private SharedPreferences user;
-   private  SharedPreferences.Editor editor;
-    @Override
+    private SharedPreferences user;
+    private SharedPreferences.Editor editor;
+    private EditText nameE;
+    private EditText birthE;
+    private EditText addressE;
+    private EditText medicalE;
+    private EditText drugE;
+    private EditText surgeryE;
+    private EditText phoneE;
+    private int rh;
+    private int type;
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_yours);
 
+        //////////////////////////병력사항 선택 시작//////////////////////////
         final List<String> selectedItems = new ArrayList<String>();
-
-
         medicalHisoty = (Button) findViewById(R.id.medicalSelect);
-
-
         medicalHisoty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,9 +103,10 @@ public class AboutYours extends AppCompatActivity {
 
             }
         });
+//////////////////////////병력사항 선택 끄읏//////////////////////////
 
 
-        //RH 타입
+        ////////////////////RH 타입 시작////////////////////
         String[] rhlist = getResources().getStringArray(R.array.rhSelect);
         rhspinner = (Spinner) findViewById(R.id.rhset);
         ArrayAdapter rhadapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, rhlist);
@@ -105,7 +116,7 @@ public class AboutYours extends AppCompatActivity {
         rhspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                bloodS=rhspinner.getSelectedItem().toString();
+                rh = rhspinner.getSelectedItemPosition();
             }
 
             @Override
@@ -113,19 +124,21 @@ public class AboutYours extends AppCompatActivity {
 
             }
         });
+////////////////////RH 타입 끄읏////////////////////
 
 
-        //blood 타입
+        ///////////////////////blood 타입 시작///////////////////////////
         final String[] bloodlist = getResources().getStringArray(R.array.bloodSelect);
         bloodspinner = (Spinner) findViewById(R.id.bloodset);
         ArrayAdapter bloodadapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, bloodlist);
         bloodadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         bloodspinner.setAdapter(bloodadapter);
 
+
         bloodspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                bloodS += " " +bloodspinner.getSelectedItem().toString();
+                type = bloodspinner.getSelectedItemPosition();
             }
 
             @Override
@@ -133,69 +146,140 @@ public class AboutYours extends AppCompatActivity {
 
             }
         });
+///////////////////////blood 타입 끄읏///////////////////////////
+        user = getSharedPreferences("User", MODE_PRIVATE);
+        nameE = (EditText) findViewById(R.id.username);
+        birthE = (EditText) findViewById(R.id.userbirth);
+        addressE = (EditText) findViewById(R.id.useraddress);
+        medicalE = (EditText) findViewById(R.id.userMedicalHistory);
+        drugE = (EditText) findViewById(R.id.userdrug);
+        surgeryE = (EditText) findViewById(R.id.usersurgery);
+        phoneE = (EditText) findViewById(R.id.guardianphone);
+        Boolean savecheck = false;
 
+        //수정 누를 시
+        savecheck = user.getBoolean("savecheck", false);
+        if (savecheck) {
+            String nameS = user.getString("name", null);
+            nameE.setText(nameS);
 
+            String birthS = user.getString("birth", null);
+            birthE.setText(birthS);
+
+            String addressS = user.getString("address", null);
+            addressE.setText(addressS);
+
+            RadioButton fb = (RadioButton) findViewById(R.id.female);
+            RadioButton mb = (RadioButton) findViewById(R.id.male);
+
+            String genderS = user.getString("gender", null);
+            if (genderS.equals("여성"))
+                fb.setChecked(true);
+            else if (genderS.equals("남성"))
+                mb.setChecked(true);
+
+            int rhI = user.getInt("rh", -1);
+            rhspinner.setSelection(rhI);
+            int typeI = user.getInt("type", -1);
+            bloodspinner.setSelection(typeI);
+
+            String medicalS = user.getString("medical", null);
+            medicalE.setText(medicalS);
+
+            String drugS = user.getString("drug", null);
+            drugE.setText(drugS);
+
+            String surgeryS = user.getString("surgery", null);
+            surgeryE.setText(surgeryS);
+
+            String numberS = user.getString("phone", null);
+            phoneE.setText(numberS);
+        }
+
+        //////저장 눌렀을 때////////
         save = (Button) findViewById(R.id.save);
         save.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
-                user = getSharedPreferences("User", MODE_PRIVATE);
 
                 editor = user.edit();
 
-                EditText nameE = (EditText) findViewById(R.id.username);
                 String nameS = nameE.getText().toString();
                 editor.putString("name", nameS);
 
-                EditText birthE = (EditText) findViewById(R.id.userbirth);
-                String birthS = birthE.getText().toString();
+                final String birthS = birthE.getText().toString();
                 editor.putString("birth", birthS);
 
-                EditText addressE = (EditText) findViewById(R.id.useraddress);
-                String addressS = addressE.getText().toString();
+                final String addressS = addressE.getText().toString();
                 editor.putString("address", addressS);
 
+                RadioGroup radioGroup = (RadioGroup) findViewById(R.id.usergender);
+                if (radioGroup.getCheckedRadioButtonId() == -1) {
+                    Toast.makeText(getApplicationContext(), "빈 필수사항이 있습니다.", Toast.LENGTH_LONG).show();
+                } else {
+                    RadioButton selectedB = (RadioButton) findViewById(radioGroup.getCheckedRadioButtonId());
+                    int ra = radioGroup.getCheckedRadioButtonId();
+                    String selected = selectedB.getText().toString();
+                    editor.putString("gender", selected);
+                }
 
-                RadioGroup.OnCheckedChangeListener radioGroupButtonChangeListener = new RadioGroup.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
-                        if (i == R.id.female) {
-                            editor.putString("gender", "여성");
-                        } else if (i == R.id.male) {
-                            editor.putString("gender", "남성");
-                        }
-                    }
-                };
 
+                editor.putInt("rh", rh);
+                editor.putInt("type", type);
+                bloodS = rhspinner.getSelectedItem().toString() + " " + bloodspinner.getSelectedItem().toString();
                 editor.putString("blood", bloodS);
 
-                EditText medicalE = (EditText) findViewById(R.id.userMedicalHistory);
                 String medicalS = medicalE.getText().toString();
                 editor.putString("medical", medicalS);
 
-                EditText drugE = (EditText) findViewById(R.id.userdrug);
                 String drugS = drugE.getText().toString();
                 editor.putString("drug", drugS);
 
-                EditText surgeryE = (EditText) findViewById(R.id.usersurgery);
                 String surgeryS = surgeryE.getText().toString();
                 editor.putString("surgery", surgeryS);
 
-                EditText phoneE = (EditText) findViewById(R.id.guardianphone);
                 String phoneS = phoneE.getText().toString();
                 editor.putString("phone", phoneS);
 
-// 메모리에 있는 데이터를 저장장치에 저장한다.
+                editor.putBoolean("savecheck", true);
                 editor.commit();
 
-                //뒤로가기 제거
-                Intent intent = new Intent(getApplicationContext(), ControlCenterv2.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                boolean check;
+                String name = user.getString("name", null);
+                String birth = user.getString("birth", null);
+                String address = user.getString("address", null);
+                String gender = user.getString("gender", null);
+                String blood = user.getString("blood", null);
+                String number = user.getString("phone", null);
 
-                startActivity(intent);
+                if (TextUtils.isEmpty(name) || TextUtils.isEmpty(birth) || TextUtils.isEmpty(address) || TextUtils.isEmpty(gender) || TextUtils.isEmpty(blood) || TextUtils.isEmpty(number))
+                    check = false;
+                else
+                    check = true;
+
+                //화면전환 & 뒤로가기 제거
+                Prefs prefs = GBApplication.getPrefs();
+                if (!check) {
+                    Toast.makeText(getApplicationContext(), "빈 필수사항이 있습니다.", Toast.LENGTH_LONG).show();
+                } else if (prefs.getBoolean("firstrun", true)) {
+
+                    Intent intent = new Intent(getApplicationContext(), ControlCenterv2.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                    startActivity(intent);
+                    prefs.getPreferences().edit().putBoolean("firstrun", false).apply();
+                } else {
+                    Intent intent = new Intent(getApplicationContext(), AboutYoursSave.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                    startActivity(intent);
+                }
+
+
             }
+
         });
 
 
