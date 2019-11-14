@@ -104,7 +104,7 @@ public class LiveActivityFragment extends AbstractChartFragment {
     private double UserMaxHeartRate =  60; //(int)206.9 - (0.67 * 74); //157
     private int UserMinHeartRate = 50;
     private TimestampTranslation tsTranslation;
-
+    private int NoSBCount=0;
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int PERMISSIONS_REQUEST_CODE = 100;
     String[] REQUIRED_PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
@@ -199,6 +199,17 @@ public class LiveActivityFragment extends AbstractChartFragment {
         if (steps > 0) {
             addEntries(steps, timestamp);
         }
+
+        if(sample.getHeartRate() <= 0)
+        {
+            NoSBCount += 1;
+            Toast.makeText(getContext(), NoSBCount+"카운트1 "+mHeartRate, Toast.LENGTH_SHORT).show();
+        }
+        else {
+            NoSBCount = 0;
+            Toast.makeText(getContext(), NoSBCount+"카운트2 "+mHeartRate + heartRate, Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     private int translateTimestampFrom(Intent intent) {

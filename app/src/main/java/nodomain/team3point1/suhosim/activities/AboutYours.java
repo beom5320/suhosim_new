@@ -273,7 +273,6 @@ public class AboutYours extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), AboutYoursSave.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
                     startActivity(intent);
                 }
 
