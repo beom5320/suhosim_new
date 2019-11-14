@@ -22,6 +22,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
@@ -73,6 +74,8 @@ import nodomain.team3point1.suhosim.model.ActivitySample;
 import nodomain.team3point1.suhosim.model.ActivityUser;
 import nodomain.team3point1.suhosim.model.DeviceService;
 import nodomain.team3point1.suhosim.util.GB;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class LiveActivityFragment extends AbstractChartFragment {
     private static final Logger LOG = LoggerFactory.getLogger(LiveActivityFragment.class);
@@ -232,7 +235,34 @@ public class LiveActivityFragment extends AbstractChartFragment {
        1. 진동 or 핸드폰으로 알려야 함
        2. ??..??...??????????????!!?
      */
+
+    private SharedPreferences user;
+    private Context mContext;
     private void setCurrentHeartRate(int heartRate, int timestamp) {
+
+
+        user = getContext().getSharedPreferences("User", MODE_PRIVATE);
+        String nameL = user.getString("name", null);
+
+        String birthL = user.getString("birth", null);
+
+        String addressL = user.getString("address", null);
+
+        String genderL = user.getString("gender", null);
+
+        String bloodL = user.getString("blood", null);
+
+        String medicalL = user.getString("medical", null);
+
+        String drugL = user.getString("drug", null);
+
+        String surgeryL = user.getString("surgery", null);
+
+        String numberL = user.getString("phone", null);
+
+
+
+
         addHistoryDataSet(true);
         mHeartRate = heartRate;
         if (mMaxHeartRate < mHeartRate) {
@@ -252,22 +282,22 @@ public class LiveActivityFragment extends AbstractChartFragment {
             if (WarningCount == 1) // 최초 발생 시 보호자에게 문자 전송
             {
                 SmsManager sm = SmsManager.getDefault();
-                String messageText1 = "[수호심 앱에서 긴급 발신된 문자입니다]\n양병일 님이 심정지 전조증상을 보이고 있습니다.\n현재 심박수: "+mHeartRate;
+                String messageText1 = "[수호심 앱에서 긴급 발신된 문자입니다]\n"+nameL+"님이 심정지 전조증상을 보이고 있습니다.\n현재 심박수: "+mHeartRate;
                 String messageText2 = "[현재 GPS 위치]\n위도: "+latitude+", 경도: "+longitude;
                 String messageText3 = "[현재 GPS 주소]\n"+address;
-                sm.sendTextMessage("01096631750", null, messageText1, null, null);
-                sm.sendTextMessage("01096631750", null, messageText2, null, null);
-                sm.sendTextMessage("01096631750", null, messageText3, null, null);
+                sm.sendTextMessage(numberL, null, messageText1, null, null);
+                sm.sendTextMessage(numberL, null, messageText2, null, null);
+                sm.sendTextMessage(numberL, null, messageText3, null, null);
             }
 
             else if (WarningCount == 10) // 10회 발생 시 119에 문자 전송
             {
                 SmsManager sm = SmsManager.getDefault();
                 String messageText1 = "[심박수 모니터링 앱에서 긴급 발신된 문자입니다.]";
-                String messageText2 = "실제 상황입니다. 양병일님이 심정지 전조증상을 보이고 있습니다.\n현재 심박수: "+mHeartRate;
-                String messageText3 = "자택주소: 경기도 안양시 만안구 박달2동 XX아파트 XXX동 XXX호";
-                String messageText4 = "생년월일: 960101\n수술이력: 없음\n혈액형: Rh+ A형";
-                String messageText5 = "양병일님 연락처: 01012345678\n보호자 연락처: 01012345678";
+                String messageText2 = "실제 상황입니다. "+nameL+"님이 심정지 전조증상을 보이고 있습니다.\n현재 심박수: "+mHeartRate;
+                String messageText3 = "자택주소: "+addressL;
+                String messageText4 = "성별: "+genderL+"\n생년월일: "+birthL+"\n혈액형: "+bloodL+"\n수술이력: "+surgeryL;
+                String messageText5 = "병력사항: "+medicalL+"\n보호자 연락처: "+numberL;
                 String messageText6 = "[현재 GPS 위치]\n위도: "+latitude+"\n경도: "+longitude;
                 String messageText7 = "[현재 GPS 주소]\n"+address;
 
