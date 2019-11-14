@@ -168,14 +168,10 @@ public class GetLocation extends AppCompatActivity {
             Log.d("@@@", ""+latitude+","+longitude+","+addresses);
         } catch (IOException ioException) {
             Log.d("@@@", "지오코더 서비스 사용 불가");
-            //네트워크 문제
-            //Toast.makeText(this, "지오코더 서비스 사용불가", Toast.LENGTH_LONG).show();
             return "지오코더 서비스 사용불가";
         } catch (IllegalArgumentException illegalArgumentException) {
             Log.d("@@@", "잘못된 GPS 좌표");
-            //Toast.makeText(this, "잘못된 GPS 좌표", Toast.LENGTH_LONG).show();
             return "잘못된 GPS 좌표";
-
         }
 
 

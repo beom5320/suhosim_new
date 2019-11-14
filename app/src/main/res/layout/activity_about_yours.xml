@@ -45,11 +45,57 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="[필수사항]"
-                    android:textSize="20dp" />
+                    android:layout_marginLeft="25dp"
+                    android:textSize="20dp"
+                    android:textStyle="bold"/>
             </LinearLayout>
+
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="454dp">
+
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+
+                <TextView
+                    android:id="@+id/phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="보  호  자\n연  락  처"
+                    android:layout_marginBottom="10dp"
+                    android:textSize="20dp" />
+
+
+                <EditText
+                    android:id="@+id/guardianphone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="-없이 연속으로 입력"
+                    android:inputType="number"
+                    android:maxLength="11" />
+
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="454dp">
 
@@ -338,7 +384,10 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="[선택사항]"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="25dp"
+                    android:textStyle="bold"/>
             </LinearLayout>
 
             <LinearLayout
@@ -514,84 +563,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text=""
-                    android:textSize="20dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="보호자 연락처 [필수사항]"
-                    android:textSize="20dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="454dp">
-
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
-
-
-                <TextView
-                    android:id="@+id/phone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="전화번호"
-                    android:textSize="20dp" />
-
-
-                <EditText
-                    android:id="@+id/guardianphone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:hint="-없이 연속으로 입력"
-                    android:inputType="number"
-                    android:maxLength="11" />
-
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
                 android:layout_height="match_parent" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text=""
-                    android:textSize="20dp" />
-            </LinearLayout>
-
 
             <Button
                 android:id="@+id/save"
