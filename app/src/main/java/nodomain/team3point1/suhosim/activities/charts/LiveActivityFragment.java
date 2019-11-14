@@ -25,6 +25,7 @@ import android.content.IntentFilter;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -97,7 +98,7 @@ public class LiveActivityFragment extends AbstractChartFragment {
     private int WarningCount = 0;
     private int WarningCount2 = 0;
     private int mMaxHeartRate = 0;
-    private double UserMaxHeartRate =  51; //(int)206.9 - (0.67 * 74); //157
+    private double UserMaxHeartRate =  60; //(int)206.9 - (0.67 * 74); //157
     private int UserMinHeartRate = 50;
     private TimestampTranslation tsTranslation;
 
@@ -239,33 +240,46 @@ public class LiveActivityFragment extends AbstractChartFragment {
         }
         if (mHeartRate > UserMaxHeartRate)
         {
-            //Toast.makeText(getContext(), "(경고) 최대심박수 초과!", Toast.LENGTH_LONG).show();
-
             WarningCount += 1;
-            if (WarningCount == 1)
+
+            // GPS 위치 확인 및 주소 변환
+            gpsTracker = new GpsTracker(getContext());
+            getLocation = new GetLocation();
+            double latitude = gpsTracker.getLatitude();
+            double longitude = gpsTracker.getLongitude();
+            String address = getLocation.getCurrentAddress(latitude, longitude);
+
+            if (WarningCount == 1) // 최초 발생 시 보호자에게 문자 전송
             {
-                gpsTracker = new GpsTracker(getContext());
-                double latitude = gpsTracker.getLatitude();
-                double longitude = gpsTracker.getLongitude();
-
-                getLocation = new GetLocation();
-                String address = getLocation.getCurrentAddress(latitude, longitude);
-
-                Toast.makeText(getContext(), "위도:" + latitude + "\n경도:" + longitude + "\n" + address, Toast.LENGTH_LONG).show();
-
                 SmsManager sm = SmsManager.getDefault();
-                String messageText1 = "[수호심 앱에서 긴급 발신된 문자입니다]\n피보호자 OOO님의 심박수가 이상 증세를 보이고 있습니다. 심박수:"+mHeartRate;
-                String messageText2 = "[현재 GPS 위치]\n위도:"+latitude+", 경도:"+longitude;
+                String messageText1 = "[수호심 앱에서 긴급 발신된 문자입니다]\n양병일 님이 심정지 전조증상을 보이고 있습니다.\n현재 심박수: "+mHeartRate;
+                String messageText2 = "[현재 GPS 위치]\n위도: "+latitude+", 경도: "+longitude;
                 String messageText3 = "[현재 GPS 주소]\n"+address;
-
-                //String messageText2 = "실제상황입니다. 양병일 환자의 심박수가 심정지 전조증상을 보이고 있습니다. ";
-                //String messageText3 = "집주소 : 경기도 안양시 만안구 박달2동 XX아파트 XXX동 XXX호";
-                //String messageText4 = "나이 : (만)24세 / 수술이력 : [없음] / 혈액형 : [RH+ 호감형]";
                 sm.sendTextMessage("01096631750", null, messageText1, null, null);
                 sm.sendTextMessage("01096631750", null, messageText2, null, null);
                 sm.sendTextMessage("01096631750", null, messageText3, null, null);
-                //Toast.makeText(getContext(), "119에 문자메시지가 전송되었습니다. ", Toast.LENGTH_SHORT).show();
             }
+
+            else if (WarningCount == 10) // 10회 발생 시 119에 문자 전송
+            {
+                SmsManager sm = SmsManager.getDefault();
+                String messageText1 = "[심박수 모니터링 앱에서 긴급 발신된 문자입니다.]";
+                String messageText2 = "실제 상황입니다. 양병일님이 심정지 전조증상을 보이고 있습니다.\n현재 심박수: "+mHeartRate;
+                String messageText3 = "자택주소: 경기도 안양시 만안구 박달2동 XX아파트 XXX동 XXX호";
+                String messageText4 = "생년월일: 960101\n수술이력: 없음\n혈액형: Rh+ A형";
+                String messageText5 = "양병일님 연락처: 01012345678\n보호자 연락처: 01012345678";
+                String messageText6 = "[현재 GPS 위치]\n위도: "+latitude+"\n경도: "+longitude;
+                String messageText7 = "[현재 GPS 주소]\n"+address;
+
+                sm.sendTextMessage("01096631750", null, messageText1, null, null);
+                sm.sendTextMessage("01096631750", null, messageText2, null, null);
+                sm.sendTextMessage("01096631750", null, messageText3, null, null);
+                sm.sendTextMessage("01096631750", null, messageText4, null, null);
+                sm.sendTextMessage("01096631750", null, messageText5, null, null);
+                sm.sendTextMessage("01096631750", null, messageText6, null, null);
+                sm.sendTextMessage("01096631750", null, messageText7, null, null);
+            }
+
         }
         /*
         if (mHeartRate > 10 && mHeartRate < UserMinHeartRate)
@@ -476,7 +490,7 @@ public class LiveActivityFragment extends AbstractChartFragment {
         }
 
         GBApplication.deviceService().onEnableRealtimeSteps(enable);
-        GBApplication.deviceService().onEnableRealtimeHeartRateMeasurement(enable);
+        GBApplication.deviceService().onEnableRealtimeHeartRateMeasurement(enable); // 이거 안켜주면 심박수 안들어오네
         if (enable) {
             if (getActivity() != null) {
                 getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
