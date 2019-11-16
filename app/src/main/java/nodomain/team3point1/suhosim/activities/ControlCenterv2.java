@@ -75,6 +75,8 @@ import nodomain.team3point1.suhosim.util.AndroidUtils;
 import nodomain.team3point1.suhosim.util.GB;
 import nodomain.team3point1.suhosim.util.Prefs;
 
+import static nodomain.team3point1.suhosim.GBApplication.getContext;
+
 //TODO: extend AbstractGBActivity, but it requires actionbar that is not available
 public class ControlCenterv2 extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, GBActivity {
@@ -96,7 +98,7 @@ public class ControlCenterv2 extends AppCompatActivity
 
     private static PhoneStateListener fakeStateListener;
 
-
+    private SharedPreferences user;
 
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
@@ -309,9 +311,11 @@ public class ControlCenterv2 extends AppCompatActivity
                                                 {
                                                     public void run()
                                                     {
+                                                        user = getContext().getSharedPreferences("User", MODE_PRIVATE);
+                                                        String numberA = user.getString("phone", null);
                                                         SmsManager sm = SmsManager.getDefault();
                                                         String messageText= "사용자가 미착용한 지 5초가 경과하였습니다.";
-                                                        sm.sendTextMessage("01040360567", null, messageText, null, null);
+                                                        sm.sendTextMessage(numberA, null, messageText, null, null);
                                                     }
                                                 }
                                         , 5000);

@@ -290,7 +290,7 @@ public class LiveActivityFragment extends AbstractChartFragment {
             double longitude = gpsTracker.getLongitude();
             String address = getLocation.getCurrentAddress(latitude, longitude);
 
-            if (WarningCount == 1) // 최초 발생 시 보호자에게 문자 전송
+            if (WarningCount == 3) // 최초 발생 시 보호자에게 문자 전송
             {
                 SmsManager sm = SmsManager.getDefault();
                 String messageText1 = "[수호심 앱에서 긴급 발신된 문자입니다]\n"+nameL+"님이 심정지 전조증상을 보이고 있습니다.\n현재 심박수: "+mHeartRate;
@@ -301,7 +301,7 @@ public class LiveActivityFragment extends AbstractChartFragment {
                 sm.sendTextMessage(numberL, null, messageText3, null, null);
             }
 
-            else if (WarningCount == 10) // 10회 발생 시 119에 문자 전송
+            else if (WarningCount == 13) // 10회 발생 시 119에 문자 전송
             {
                 SmsManager sm = SmsManager.getDefault();
                 String messageText1 = "[심박수 모니터링 앱에서 긴급 발신된 문자입니다.]";
