@@ -312,13 +312,13 @@ public class LiveActivityFragment extends AbstractChartFragment {
                 String messageText6 = "[현재 GPS 위치]\n위도: "+latitude+"\n경도: "+longitude;
                 String messageText7 = "[현재 GPS 주소]\n"+address;
 
-                sm.sendTextMessage("01096631750", null, messageText1, null, null);
-                sm.sendTextMessage("01096631750", null, messageText2, null, null);
-                sm.sendTextMessage("01096631750", null, messageText3, null, null);
-                sm.sendTextMessage("01096631750", null, messageText4, null, null);
-                sm.sendTextMessage("01096631750", null, messageText5, null, null);
-                sm.sendTextMessage("01096631750", null, messageText6, null, null);
-                sm.sendTextMessage("01096631750", null, messageText7, null, null);
+                sm.sendTextMessage("01037578540", null, messageText1, null, null);
+                sm.sendTextMessage("01037578540", null, messageText2, null, null);
+                sm.sendTextMessage("01037578540", null, messageText3, null, null);
+                sm.sendTextMessage("01037578540", null, messageText4, null, null);
+                sm.sendTextMessage("01037578540", null, messageText5, null, null);
+                sm.sendTextMessage("01037578540", null, messageText6, null, null);
+                sm.sendTextMessage("01037578540", null, messageText7, null, null);
             }
 
         }

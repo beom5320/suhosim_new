@@ -19,8 +19,10 @@ package nodomain.team3point1.suhosim.activities;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -29,6 +31,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.telephony.PhoneStateListener;
+import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
 import android.view.MenuItem;
 import android.view.View;
@@ -57,6 +60,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import de.cketti.library.changelog.ChangeLog;
 import nodomain.team3point1.suhosim.GBApplication;
@@ -293,6 +298,37 @@ public class ControlCenterv2 extends AppCompatActivity
             case R.id.device_action_discover:
                 launchDiscoveryActivity();
                 return true;*/
+            case R.id.action_stop:
+                AlertDialog.Builder alert_confirm = new AlertDialog.Builder(ControlCenterv2.this);
+                alert_confirm.setMessage("착용 해제 하시겠습니까?").setCancelable(false).setPositiveButton("확인",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Timer timer = new Timer();
+                                timer.schedule( new TimerTask()
+                                                {
+                                                    public void run()
+                                                    {
+                                                        SmsManager sm = SmsManager.getDefault();
+                                                        String messageText= "사용자가 미착용한 지 5초가 경과하였습니다.";
+                                                        sm.sendTextMessage("01040360567", null, messageText, null, null);
+                                                    }
+                                                }
+                                        , 5000);
+                            }
+                        }).setNegativeButton("취소",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // 'No'
+                                return;
+                            }
+                        });
+                AlertDialog alert = alert_confirm.create();
+                alert.show();
+
+                return true;
+
 
             case R.id.action_quit:
                 GBApplication.quit();

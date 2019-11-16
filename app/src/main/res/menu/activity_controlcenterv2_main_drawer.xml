@@ -9,7 +9,9 @@
             android:title="사용자 정보"
             android:icon="@drawable/ic_user" />
 
-
+        <item android:id="@+id/action_stop"
+            android:title="착용 해제"
+            android:icon="@drawable/ic_stop" />
         <!--^@^ <item android:id="@+id/action_settings"
             android:title="@string/action_settings"
             android:icon="@drawable/ic_settings" /> -->
